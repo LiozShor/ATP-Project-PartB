@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="bb0998e9-fb81-4c5e-8012-529cfb522271" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ATP-Project-PartB.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/Client.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Client/IClientStrategy.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/IO/MyCompressorOutputStream.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/IO/MyDecompressorInputStream.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/IO/SimpleCompressorOutputStream.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/IO/SimpleDecompressorInputStream.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Server/Configurations.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Server/Server.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Server/ServerStrategyGenerateMaze.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Server/ServerStrategySolveSearchProblem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/GeneralCheckingFunctions.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/RunCommunicateWithServers.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/RunCompressDecompressMaze.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/RunMaze3DGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/RunMazeGenerator.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/RunSearchOnMaze.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/test/RunSearchOnMaze3D.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2iooKcSJDnOSKHJgn7xMbhLigYP" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="test" />
+      <recent name="Server" />
+      <recent name="IO" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="ATP-Project-PartB" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="bb0998e9-fb81-4c5e-8012-529cfb522271" name="Changes" comment="" />
+      <created>1720166235978</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1720166235978</updated>
+      <workItem from="1720166237344" duration="1017000" />
+      <workItem from="1720167791647" duration="1963000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
