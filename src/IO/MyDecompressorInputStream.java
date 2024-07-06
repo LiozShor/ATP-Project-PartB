@@ -19,31 +19,20 @@ public class MyDecompressorInputStream extends InputStream {
 
     @Override
     public int read(byte[] b) throws IOException {
-        byte[] compressed = new byte[in.available()];
-        int bytesRead = in.read(compressed);
-        byte[] decompressed = decompress(compressed, bytesRead);
-        System.arraycopy(decompressed, 0, b, 0, decompressed.length);
-        return decompressed.length;
-    }
-
-    private byte[] decompress(byte[] b, int length) throws IOException {
         ArrayList<Byte> decompressed = new ArrayList<>();
-        for (int i = 0; i < length; i += 2) {
-            byte value = b[i];
-            byte count = b[i + 1];
-            for (int j = 0; j < count; j++) {
-                decompressed.add(value);
+        int index = 0;
+        int value;
+        while ((value = in.read()) != -1) {
+            byte val = (byte) value;
+            byte count = (byte) in.read();
+            for (int j = 0; j < Byte.toUnsignedInt(count); j++) {
+                if (index >= b.length) {
+                    return index; // Prevent overflow in case of mismatched compression
+                }
+                b[index++] = val;
             }
         }
-        return toByteArray(decompressed);
-    }
-
-    private byte[] toByteArray(ArrayList<Byte> decompressed) {
-        byte[] arr = new byte[decompressed.size()];
-        for (int i = 0; i < arr.length; i++) {
-            arr[i] = decompressed.get(i);
-        }
-        return arr;
+        return index;
     }
 
     @Override

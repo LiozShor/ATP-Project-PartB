@@ -1,24 +1,24 @@
+import IO.MyCompressorOutputStream;
 import IO.SimpleCompressorOutputStream;
-import IO.SimpleDecompressorInputStream;
 import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.MyMazeGenerator;
 
+import java.io.IOException;
+import java.util.Arrays;
+
 public class Main {
-    public static void main(String[] args) {
-        MyMazeGenerator mg = new MyMazeGenerator();
-        Maze maze = mg.generate(100, 100);
+    public static void main(String[] args) throws IOException {
+
+        Maze maze = new MyMazeGenerator().generate(50, 50);
         maze.print();
-        System.out.println();
-
-        byte[] mazeInBytes = maze.toByteArray();
-        SimpleCompressorOutputStream scos = new SimpleCompressorOutputStream();
-        byte[] compressedMaze = scos.compress(mazeInBytes);
-        System.out.println("Compressed maze size: " + compressedMaze.length);
-        SimpleDecompressorInputStream sdis = new SimpleDecompressorInputStream();
-        byte[] decompressedMaze = sdis.decompress(compressedMaze);
-        Maze mazeAfterDecompression = new Maze(decompressedMaze);
-        mazeAfterDecompression.print();
-
+        byte[] mazeBytes = maze.toByteArray();
+        byte[] compressed = new byte[mazeBytes.length];
+        SimpleCompressorOutputStream compressor = new SimpleCompressorOutputStream(System.out);
+        compressor.compress(compressed);
+        MyCompressorOutputStream myCompressor = new MyCompressorOutputStream(System.out);
+        myCompressor.write(mazeBytes);
+        System.out.println(Arrays.toString(mazeBytes));
+        System.out.println(Arrays.toString(compressed));
 
 
     }
