@@ -1,44 +1,47 @@
 package IO;
 
-public class SimpleCompressorOutputStream {
+import java.io.IOException;
+import java.io.OutputStream;
 
-    public byte[] compress(byte[] b) {
-        if (b == null || b.length == 0) {
-            return new byte[0];
+public class SimpleCompressorOutputStream extends OutputStream {
+    OutputStream out;
+    public SimpleCompressorOutputStream() {
+    }
+
+    public SimpleCompressorOutputStream(OutputStream out) {
+        this.out = out;
+
+    }
+
+    @Override
+    public void write(int b) throws IOException {
+        // Implementing write(int b) is straightforward.
+        // However, for compression, you need to handle byte arrays.
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public void compress(byte[] uncompressedData) throws IOException {
+        compress(uncompressedData, out);
+    }
+
+    public void compress(byte[] uncompressedData, OutputStream outputStream) throws IOException {
+        if (uncompressedData == null || uncompressedData.length == 0) {
+            return;
         }
 
-        // Calculate the size of the compressed array
-        int size = 0;
-        byte current = b[0];
+        byte current = uncompressedData[0];
         int count = 1;
-        for (int i = 1; i < b.length; i++) {
-            if (b[i] == current && count < 255) { // count is limited to 255
+        for (int i = 1; i <= uncompressedData.length; i++) {
+            if (i < uncompressedData.length && uncompressedData[i] == current && count < 255) {
                 count++;
             } else {
-                size += 2; // Increase size for a new pair (byte + count)
-                current = b[i];
-                count = 1;
+                outputStream.write(current);
+                outputStream.write((byte) count);
+                if (i < uncompressedData.length) {
+                    current = uncompressedData[i];
+                    count = 1;
+                }
             }
         }
-        size += 2; // Account for the last run
-
-        byte[] compressed = new byte[size];
-        current = b[0];
-        count = 1;
-        int index = 0;
-        for (int i = 1; i < b.length; i++) {
-            if (b[i] == current && count < 255) { // count is limited to 255
-                count++;
-            } else {
-                compressed[index++] = current;
-                compressed[index++] = (byte) count;
-                current = b[i];
-                count = 1;
-            }
-        }
-        compressed[index++] = current;
-        compressed[index] = (byte) count; // Last run
-
-        return compressed;
     }
 }

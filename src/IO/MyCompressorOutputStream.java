@@ -25,19 +25,20 @@ public class MyCompressorOutputStream extends OutputStream {
 
     private byte[] compress(byte[] b) {
         ArrayList<Byte> compressed = new ArrayList<>();
-        byte current = b[0];
+        int current = Byte.toUnsignedInt(b[0]);
         int count = 1;
         for (int i = 1; i < b.length; i++) {
-            if (b[i] == current) {
+            int next = Byte.toUnsignedInt(b[i]);
+            if (next == current && count < 255) {
                 count++;
             } else {
-                compressed.add(current);
+                compressed.add((byte) current);
                 compressed.add((byte) count);
-                current = b[i];
+                current = next;
                 count = 1;
             }
         }
-        compressed.add(current);
+        compressed.add((byte) current);
         compressed.add((byte) count);
         return toByteArray(compressed);
     }
