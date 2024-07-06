@@ -58,10 +58,7 @@ public class RunCommunicateWithServers {
                     }
                 }
 
-                @Override
-                public void applyStrategy(InputStream inFromServer, OutputStream outToServer) {
-                    return;
-                }
+
             });
             client.communicateWithServer();
         } catch (UnknownHostException e) {
@@ -71,7 +68,7 @@ public class RunCommunicateWithServers {
 
     private static void CommunicateWithServer_SolveSearchProblem() {
         try {
-            Client client = new Client(InetAddress.getLocalHost(), 5400, new IClientStrategy() {
+            Client client = new Client(InetAddress.getLocalHost(), 5401, new IClientStrategy() {
                 @Override
                 public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
                     try {
@@ -93,10 +90,7 @@ public class RunCommunicateWithServers {
                     }
                 }
 
-                @Override
-                public void applyStrategy(InputStream inFromServer, OutputStream outToServer) {
 
-                }
             });
             client.communicateWithServer();
         } catch (UnknownHostException e) {
@@ -124,10 +118,7 @@ public class RunCommunicateWithServers {
                     }
                 }
 
-                @Override
-                public void applyStrategy(InputStream inFromServer, OutputStream outToServer) {
 
-                }
             });
             client.communicateWithServer();
         } catch (UnknownHostException e) {

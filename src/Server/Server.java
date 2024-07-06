@@ -22,26 +22,33 @@ public class Server {
 
     public void start() {
         new Thread(() -> {
-            try {
-                ServerSocket serverSocket = new ServerSocket(port);
+            try (ServerSocket serverSocket = new ServerSocket(port)) {
+                System.out.println("Server started on port " + port);
                 while (!stop) {
                     try {
                         Socket clientSocket = serverSocket.accept();
                         threadPool.submit(() -> {
                             try {
                                 serverStrategy.handleClient(clientSocket.getInputStream(), clientSocket.getOutputStream());
-                                clientSocket.close();
                             } catch (IOException e) {
                                 e.printStackTrace();
+                            } finally {
+                                try {
+                                    clientSocket.close();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                             }
                         });
                     } catch (IOException e) {
-                        e.printStackTrace();
+                        if (!stop) {
+                            e.printStackTrace();
+                        }
                     }
                     Thread.sleep(listeningIntervalMS);
                 }
-                serverSocket.close();
                 threadPool.shutdown();
+                System.out.println("Server on port " + port + " stopped.");
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
@@ -52,13 +59,11 @@ public class Server {
         stop = true;
     }
 
+    public static void main(String[] args) {
+        Server serverMaze = new Server(5400, 1000, new ServerStrategyGenerateMaze());
+        Server serverSolve = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
 
-        public static void main(String[] args) {
-            Server serverMaze = new Server(5400, 1000,  new ServerStrategyGenerateMaze());
-            Server serverSolve = new Server(5401, 1000,  new ServerStrategySolveSearchProblem());
-
-            serverMaze.start();
-            serverSolve.start();
-        }
-
+        serverMaze.start();
+        serverSolve.start();
+    }
 }

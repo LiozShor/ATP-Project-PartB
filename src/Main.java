@@ -8,7 +8,7 @@ public class Main {
         MyMazeGenerator mg = new MyMazeGenerator();
         Maze maze = mg.generate(10, 10);
         maze.print();
-        SimpleCompressorOutputStream scos = new SimpleCompressorOutputStream(maze.toByteArray());
+        SimpleCompressorOutputStream scos = new SimpleCompressorOutputStream();
 
         byte[] compressed = scos.compress(maze.toByteArray());
         System.out.println("Compressed size: " + compressed.length);
