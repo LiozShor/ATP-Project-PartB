@@ -23,6 +23,7 @@ public class Maze {
                  index++;
              }
          }
+
      }
 
     public Maze(int[][] maze, Position start, Position goal) {
