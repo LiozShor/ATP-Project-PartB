@@ -31,7 +31,6 @@ public class Maze implements Serializable {
                     maze[i][j] = mazeInBytes[index];
                     index++;
                 } else {
-                    System.err.println("Error: Insufficient data in mazeInBytes array.");
                     return; // Exit constructor or handle error condition
                 }
             }
