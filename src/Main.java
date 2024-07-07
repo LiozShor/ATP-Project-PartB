@@ -90,6 +90,10 @@ public class Main {
     }
     public static void main(String[] args) {
         try {
+            Configurations conf = Configurations.getInstance();
+            conf.setProperty("threadPoolSize", "5");
+            conf.setProperty("mazeGeneratingAlgorithm", "MyMazeGenerator");
+            conf.setProperty("mazeSearchingAlgorithm", "DepthFirstSearch");
 
             Test_CompressDecompressMaze();
 

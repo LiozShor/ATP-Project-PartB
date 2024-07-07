@@ -24,7 +24,17 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
                 solutionReader.close();
             } else {  //solves and saves the solution
                 SearchableMaze searchableMaze = new SearchableMaze(maze);
-                ISearchingAlgorithm searcher = new BreadthFirstSearch();
+                ISearchingAlgorithm searcher = null;
+                Configurations configurations = Configurations.getInstance();
+                String mazeSearchingAlgorithm = configurations.getMazeSearchingAlgorithm();
+                switch (mazeSearchingAlgorithm) {
+                    case "BestFirstSearch" -> searcher = new BestFirstSearch();
+                    case "BreadthFirstSearch" -> searcher = new BreadthFirstSearch();
+                    case "DepthFirstSearch" -> searcher = new DepthFirstSearch();
+                }
+                if (searcher == null) {
+                    throw new Exception("Maze searching algorithm not found");
+                }
                 solution = searcher.solve(searchableMaze);
 
                 ObjectOutputStream solutionWriter = new ObjectOutputStream(new FileOutputStream(solutionFilePath.toFile()));
@@ -37,6 +47,8 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             toClient.close();
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 }
