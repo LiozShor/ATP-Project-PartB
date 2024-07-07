@@ -7,6 +7,8 @@ import java.util.ArrayList;
 public class MyDecompressorInputStream extends InputStream {
 
     private InputStream in;
+    private byte[] decompressedData;
+    private int currentPosition;
 
     public MyDecompressorInputStream(InputStream in) {
         this.in = in;
@@ -14,7 +16,10 @@ public class MyDecompressorInputStream extends InputStream {
 
     @Override
     public int read() throws IOException {
-        return in.read();
+        if (currentPosition >= decompressedData.length) {
+            return -1; // End of stream
+        }
+        return decompressedData[currentPosition++];
     }
 
     @Override
@@ -23,8 +28,8 @@ public class MyDecompressorInputStream extends InputStream {
         int index = 0;
         int value;
         while ((value = in.read()) != -1) {
-            byte val = (byte) value;
-            byte count = (byte) in.read();
+            byte count = (byte) value;
+            byte val = (byte) in.read();
             for (int j = 0; j < Byte.toUnsignedInt(count); j++) {
                 if (index >= b.length) {
                     return index; // Prevent overflow in case of mismatched compression

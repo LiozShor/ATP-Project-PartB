@@ -15,8 +15,6 @@ public class RunCommunicateWithServers {
 
     public static void main(String[] args) {
 //Initializing servers
-        Configurations config = Configurations.getInstance();
-        config.setProperty("mazeGeneratingAlgorithm", "EmptyMazeGenerator");
         Server mazeGeneratingServer = new Server(5400, 1000, new
                 ServerStrategyGenerateMaze());
         Server solveSearchProblemServer = new Server(5401, 1000, new

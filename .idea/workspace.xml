@@ -6,7 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="bb0998e9-fb81-4c5e-8012-529cfb522271" name="Changes" comment="ASS1-ConfigurationOption">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/algorithms/mazeGenerators/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/algorithms/mazeGenerators/Maze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/properties.config" beforeDir="false" afterPath="$PROJECT_DIR$/resources/properties.config" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/savedMaze.maze" beforeDir="false" afterPath="$PROJECT_DIR$/savedMaze.maze" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IO/MyCompressorOutputStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/MyCompressorOutputStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IO/MyDecompressorInputStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/MyDecompressorInputStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IO/SimpleCompressorOutputStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/SimpleCompressorOutputStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/IO/SimpleDecompressorInputStream.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/IO/SimpleDecompressorInputStream.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/RunCommunicateWithServers.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/RunCommunicateWithServers.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +69,7 @@
       <recent name="IO" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.RunCommunicateWithServers (1)">
+  <component name="RunManager" selected="Application.RunCommunicateWithServers">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="ATP-Project-PartB" />
@@ -125,11 +131,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.RunCommunicateWithServers" />
+        <item itemvalue="Application.Main" />
         <item itemvalue="Application.RunCommunicateWithServers (1)" />
         <item itemvalue="Application.RunCompressDecompressMaze" />
-        <item itemvalue="Application.Main" />
         <item itemvalue="Application.RunCommunicateWithServers (4)" />
-        <item itemvalue="Application.RunCommunicateWithServers" />
       </list>
     </recent_temporary>
   </component>
@@ -165,7 +171,14 @@
       <option name="project" value="LOCAL" />
       <updated>1720343749994</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="ASS1-ConfigurationOption">
+      <created>1720346076807</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1720346076807</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
