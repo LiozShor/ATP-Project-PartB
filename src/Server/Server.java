@@ -29,7 +29,7 @@ public class Server {
                         Socket clientSocket = serverSocket.accept();
                         threadPool.submit(() -> {
                             try {
-                                serverStrategy.handleClient(clientSocket.getInputStream(), clientSocket.getOutputStream());
+                                serverStrategy.serverStrategy(clientSocket.getInputStream(), clientSocket.getOutputStream());
                             } catch (IOException e) {
                                 e.printStackTrace();
                             } finally {
@@ -59,11 +59,11 @@ public class Server {
         stop = true;
     }
 
-    public static void main(String[] args) {
-        Server serverMaze = new Server(5400, 1000, new ServerStrategyGenerateMaze());
-        Server serverSolve = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
-
-        serverMaze.start();
-        serverSolve.start();
-    }
+//    public static void main(String[] args) {
+//        Server serverMaze = new Server(5400, 1000, new ServerStrategyGenerateMaze());
+//        Server serverSolve = new Server(5401, 1000, new ServerStrategySolveSearchProblem());
+//
+//        serverMaze.start();
+//        serverSolve.start();
+//    }
 }

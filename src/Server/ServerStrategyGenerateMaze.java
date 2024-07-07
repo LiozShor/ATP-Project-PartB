@@ -7,7 +7,7 @@ import java.io.*;
 
 public class ServerStrategyGenerateMaze implements IServerStrategy {
     @Override
-    public void handleClient(InputStream inFromClient, OutputStream outToClient) {
+    public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
         try (ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
              ObjectOutputStream toClient = new ObjectOutputStream(outToClient)) {
 

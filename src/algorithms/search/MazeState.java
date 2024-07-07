@@ -1,12 +1,26 @@
 package algorithms.search;
 
+import algorithms.mazeGenerators.Maze;
 import algorithms.mazeGenerators.Position;
 
-public class MazeState extends AState {
+import java.io.Serializable;
+
+public class MazeState extends AState implements Serializable {
     private int row;
     private int col;
     private int cost;
     private MazeState parent;
+    private static final long serialVersionUID = 1857140346937818910L;
+
+
+
+    public MazeState() {
+        super(0, 0, null);
+        this.row = 0;
+        this.col = 0;
+        this.cost = 0;
+        this.parent = null;
+    }
 
     public MazeState(Position pos, MazeState parent) {
         super(pos.getRow(), pos.getColumn(),  parent);

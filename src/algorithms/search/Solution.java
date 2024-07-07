@@ -1,8 +1,10 @@
 package algorithms.search;
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Solution {
+public class Solution implements Serializable{
     private ArrayList<AState> solutionPath;
+    private static final long serialVersionUID = -4392789978072828050L;
 
     public Solution(ArrayList<AState> queue) {
         this.solutionPath = queue;

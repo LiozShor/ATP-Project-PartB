@@ -1,8 +1,12 @@
 package algorithms.search;
 
-public abstract class AState {
+import java.io.Serializable;
+
+public abstract class AState implements Serializable {
     private int row, col;
     private AState cameFrom;
+    private static final long serialVersionUID = 1L;
+
 
     public AState(int row,int col, AState cameFrom) {
         this.row = row;

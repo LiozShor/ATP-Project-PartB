@@ -9,11 +9,10 @@ import java.nio.file.Paths;
 
 public class ServerStrategySolveSearchProblem implements IServerStrategy {
     @Override
-    public void handleClient(InputStream inFromClient, OutputStream outToClient) {
+    public void serverStrategy(InputStream inFromClient, OutputStream outToClient) {
         try {
             ObjectInputStream fromClient = new ObjectInputStream(inFromClient);
             ObjectOutputStream toClient = new ObjectOutputStream(outToClient);
-
             Maze maze = (Maze) fromClient.readObject();
             String mazeHash = String.valueOf(maze.hashCode());
             String tempDirectoryPath = System.getProperty("java.io.tmpdir");
@@ -34,7 +33,6 @@ public class ServerStrategySolveSearchProblem implements IServerStrategy {
             }
 
             toClient.writeObject(solution);
-
             fromClient.close();
             toClient.close();
         } catch (IOException | ClassNotFoundException e) {

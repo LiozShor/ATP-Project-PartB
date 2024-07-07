@@ -21,16 +21,16 @@ public class RunCommunicateWithServers {
 
         // Starting servers
         solveSearchProblemServer.start();
-        mazeGeneratingServer.start();
+//        mazeGeneratingServer.start();
         // stringReverserServer.start();
 
         // Communicating with servers
-        CommunicateWithServer_MazeGenerating();
+//        CommunicateWithServer_MazeGenerating();
         CommunicateWithServer_SolveSearchProblem();
         // CommunicateWithServer_StringReverser();
 
         // Stopping all servers
-        mazeGeneratingServer.stop();
+//        mazeGeneratingServer.stop();
         solveSearchProblemServer.stop();
         // stringReverserServer.stop();
     }
@@ -52,13 +52,14 @@ public class RunCommunicateWithServers {
                         byte[] decompressedMaze = new byte[1000]; // allocate byte[] for the decompressed maze
                         is.read(decompressedMaze); // Fill decompressedMaze with bytes
                         Maze maze = new Maze(decompressedMaze);
-                        maze.print();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
 
-
+                public void applyStrategy(InputStream inFromServer, OutputStream outToServer) {
+                    return;
+                }
             });
             client.communicateWithServer();
         } catch (UnknownHostException e) {
@@ -68,7 +69,7 @@ public class RunCommunicateWithServers {
 
     private static void CommunicateWithServer_SolveSearchProblem() {
         try {
-            Client client = new Client(InetAddress.getLocalHost(), 5401, new IClientStrategy() {
+            Client client = new Client(InetAddress.getLocalHost(), 5400, new IClientStrategy() {
                 @Override
                 public void clientStrategy(InputStream inFromServer, OutputStream outToServer) {
                     try {
@@ -90,7 +91,9 @@ public class RunCommunicateWithServers {
                     }
                 }
 
+                public void applyStrategy(InputStream inFromServer, OutputStream outToServer) {
 
+                }
             });
             client.communicateWithServer();
         } catch (UnknownHostException e) {
@@ -118,7 +121,9 @@ public class RunCommunicateWithServers {
                     }
                 }
 
+                public void applyStrategy(InputStream inFromServer, OutputStream outToServer) {
 
+                }
             });
             client.communicateWithServer();
         } catch (UnknownHostException e) {

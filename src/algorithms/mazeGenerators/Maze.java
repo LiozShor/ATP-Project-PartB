@@ -1,31 +1,44 @@
 package algorithms.mazeGenerators;
 
-public class Maze {
-     private  int[][] maze;
-     private Position start;
-     private Position goal;
+import java.io.Serializable;
 
+public class Maze implements Serializable {
+    private  int[][] maze;
+    private Position start;
+    private Position goal;
 
     public Maze(byte[] mazeInBytes) {
-        int rows = (mazeInBytes[0] & 0xFF) * 256 + (mazeInBytes[1] & 0xFF);  // Ensure unsigned conversion
-        int cols = (mazeInBytes[2] & 0xFF) * 256 + (mazeInBytes[3] & 0xFF);  // Ensure unsigned conversion
-        int startRow = (mazeInBytes[4] & 0xFF) * 256 + (mazeInBytes[5] & 0xFF);  // Ensure unsigned conversion
-        int startCol = (mazeInBytes[6] & 0xFF) * 256 + (mazeInBytes[7] & 0xFF);  // Ensure unsigned conversion
-        int goalRow = (mazeInBytes[8] & 0xFF) * 256 + (mazeInBytes[9] & 0xFF);  // Ensure unsigned conversion
-        int goalCol = (mazeInBytes[10] & 0xFF) * 256 + (mazeInBytes[11] & 0xFF);  // Ensure unsigned conversion
+        if (mazeInBytes.length < 12) {
+            System.err.println("Error: Insufficient data in mazeInBytes array.");
+            return; // Exit constructor or handle error condition
+        }
+
+        int expectedLength = ((mazeInBytes[0] & 0xFF) << 8) | (mazeInBytes[1] & 0xFF);
+        int expectedWidth = ((mazeInBytes[2] & 0xFF) << 8) | (mazeInBytes[3] & 0xFF);
+        int startRow = ((mazeInBytes[4] & 0xFF) << 8) | (mazeInBytes[5] & 0xFF);
+        int startCol = ((mazeInBytes[6] & 0xFF) << 8) | (mazeInBytes[7] & 0xFF);
+        int goalRow = ((mazeInBytes[8] & 0xFF) << 8) | (mazeInBytes[9] & 0xFF);
+        int goalCol = ((mazeInBytes[10] & 0xFF) << 8) | (mazeInBytes[11] & 0xFF);
 
         this.start = new Position(startRow, startCol);
         this.goal = new Position(goalRow, goalCol);
-        this.maze = new int[rows][cols];
+        this.maze = new int[expectedLength][expectedWidth];
 
         int index = 12;
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                maze[i][j] = mazeInBytes[index];
-                index++;
+        for (int i = 0; i < expectedLength; i++) {
+            for (int j = 0; j < expectedWidth; j++) {
+                if (index < mazeInBytes.length) {
+                    maze[i][j] = mazeInBytes[index];
+                    index++;
+                } else {
+                    System.err.println("Error: Insufficient data in mazeInBytes array.");
+                    return; // Exit constructor or handle error condition
+                }
             }
         }
     }
+
+
 
 
     public Maze(int[][] maze, Position start, Position goal) {
@@ -72,24 +85,19 @@ public class Maze {
         int rows = maze.length;
         int cols = maze[0].length;
 
-        // Create byte array with enough space for maze dimensions and data
-        byte[] mazeInBytes = new byte[rows * cols + 12];
+        // Calculate total length needed for the byte array
+        int totalLength = rows * cols + 12;
+        byte[] mazeInBytes = new byte[totalLength];
 
-        // Store rows and cols (dimensions)
-        mazeInBytes[0] = (byte) (rows / 256);
-        mazeInBytes[1] = (byte) (rows % 256);
-        mazeInBytes[2] = (byte) (cols / 256);
-        mazeInBytes[3] = (byte) (cols % 256);
+        // Store dimensions (rows and columns)
+        mazeInBytes[0] = (byte) (rows >> 8);
+        mazeInBytes[1] = (byte) rows;
+        mazeInBytes[2] = (byte) (cols >> 8);
+        mazeInBytes[3] = (byte) cols;
 
         // Store start and goal positions
-        mazeInBytes[4] = (byte) (start.getRow() / 256);
-        mazeInBytes[5] = (byte) (start.getRow() % 256);
-        mazeInBytes[6] = (byte) (start.getColumn() / 256);
-        mazeInBytes[7] = (byte) (start.getColumn() % 256);
-        mazeInBytes[8] = (byte) (goal.getRow() / 256);
-        mazeInBytes[9] = (byte) (goal.getRow() % 256);
-        mazeInBytes[10] = (byte) (goal.getColumn() / 256);
-        mazeInBytes[11] = (byte) (goal.getColumn() % 256);
+        storePosition(start, mazeInBytes, 4);
+        storePosition(goal, mazeInBytes, 8);
 
         // Store maze data
         int index = 12;
@@ -101,6 +109,14 @@ public class Maze {
 
         return mazeInBytes;
     }
+
+    private void storePosition(Position pos, byte[] mazeInBytes, int startIndex) {
+        mazeInBytes[startIndex] = (byte) (pos.getRow() >> 8);
+        mazeInBytes[startIndex + 1] = (byte) pos.getRow();
+        mazeInBytes[startIndex + 2] = (byte) (pos.getColumn() >> 8);
+        mazeInBytes[startIndex + 3] = (byte) pos.getColumn();
+    }
+
 
 
 

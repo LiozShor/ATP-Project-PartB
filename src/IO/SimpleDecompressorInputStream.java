@@ -2,18 +2,16 @@ package IO;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 
 public class SimpleDecompressorInputStream extends InputStream {
 
+    private InputStream in;
     private byte[] decompressedData;
     private int currentPosition;
-    SimpleDecompressorInputStream(InputStream in) {
 
-    }
-
-    public SimpleDecompressorInputStream(byte[] compressedData) {
-        this.decompressedData = decompress(compressedData);
-        this.currentPosition = 0;
+    public SimpleDecompressorInputStream(InputStream in) {
+        this.in = in;
     }
 
     @Override
@@ -24,30 +22,26 @@ public class SimpleDecompressorInputStream extends InputStream {
         return decompressedData[currentPosition++];
     }
 
-    // Decompress method as you originally defined
-    private byte[] decompress(byte[] b) {
-        if (b == null || b.length == 0) {
-            return new byte[0];
-        }
-
-        int size = 0;
-        for (int i = 1; i < b.length; i += 2) {
-            size += b[i];
-        }
-
-        return getBytes(b, size);
-    }
-
-    private byte[] getBytes(byte[] b, int size) {
-        byte[] decompressed = new byte[size];
+    @Override
+    public int read(byte[] b) throws IOException {
+        ArrayList<Byte> decompressed = new ArrayList<>();
         int index = 0;
-
-        for (int i = 0; i < b.length; i += 2) {
-            for (int j = 0; j < b[i + 1]; j++) {
-                decompressed[index++] = b[i];
+        int value;
+        while ((value = in.read()) != -1) {
+            byte count = (byte) value;
+            byte val = (byte) in.read();
+            for (int j = 0; j < Byte.toUnsignedInt(count); j++) {
+                if (index >= b.length) {
+                    return index; // Prevent overflow in case of mismatched compression
+                }
+                b[index++] = val;
             }
         }
+        return index;
+    }
 
-        return decompressed;
+    @Override
+    public void close() throws IOException {
+        in.close();
     }
 }
